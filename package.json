@@ -12,5 +12,19 @@
   },
   "author": "Namish Saxena",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/retsea/yelp-search-service#readme"
+  "homepage": "https://bitbucket.org/retsea/yelp-search-service#readme",
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-as-promised": "^7.1.1",
+    "sinon": "^2.3.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "seneca": "^3.4.1",
+    "seneca-web": "^2.1.0",
+    "seneca-web-adapter-express": "^1.0.2"
+  }
 }

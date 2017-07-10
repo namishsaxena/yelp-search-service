@@ -1,0 +1,13 @@
+{
+    "yelp": {
+        "authConfig":{
+            "clientId" : "r80EnsMmNflBvct8IVEOpQ",
+            "clientSecret": "7kPaWC6LyldtJdxdOLugXAgU2Kgu0blTWbTC9xv6O9asg0sAOcbuADledgQT2X9L",
+            "grantType": "client_credentials",
+            "endpoint" : "https://api.yelp.com/oauth2/token"
+        },
+        "searchConfig" : {
+            "endpoint": "https://api.yelp.com/v3/businesses/search"
+        }
+    }
+}
