@@ -1,0 +1,16 @@
+{
+  "name": "yelp-search-service",
+  "version": "1.0.0",
+  "description": "Microservice for searching restaurants in Yelp",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://namishsaxena@bitbucket.org/retsea/yelp-search-service.git"
+  },
+  "author": "Namish Saxena",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/retsea/yelp-search-service#readme"
+}
