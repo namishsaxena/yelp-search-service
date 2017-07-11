@@ -1,6 +1,3 @@
-'use strict'
-
-
 var Seneca = require('seneca');
 var SenecaWeb = require('seneca-web');
 var Express = require('express');

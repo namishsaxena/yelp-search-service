@@ -1,5 +1,3 @@
-'use strict'
-
 
 var dotEnvPath = __dirname+ '/../.env';
 require('dotenv').config({path:dotEnvPath});

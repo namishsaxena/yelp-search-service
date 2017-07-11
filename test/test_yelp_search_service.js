@@ -1,5 +1,3 @@
-'use strict'
-
 
 var YelpSearchService = require('./../src/yelp_search_service');
 var chai = require('chai');

@@ -1,5 +1,3 @@
-'use strict'
-
 var YelpSearchService = require('./yelp_search_service');
 var searchService = new YelpSearchService();
 
