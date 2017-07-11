@@ -1,63 +1,55 @@
 'use strict'
 
+
+var YelpSearchService = require('./../src/yelp_search_service');
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-//var sinon = require('sinon');
-var config = require('config');
-var yelpAuthConfig = config.get('yelp.authConfig');
+var sinon = require('sinon');
 
 var expect = chai.expect;
 
-var YelpSearchService = require('./../src/yelp_search_service');
 
+var subject = new YelpSearchService();
 describe('yelpsearch', function(){
-    var subject = new YelpSearchService();
+    console.log('endpoint in test '+process.env.YELP_SEARCH_CONFIG_ENDPOINT);
 
     describe('requestAccessToken', function() {
         context('With valid clientId and secret', function() {
             it('returns a valid access token', function() {
-                subject.requestAccessToken().then(function(response){
-                    expect(response.access_token).to.be.not.null();
-                });
+                return expect(Promise.resolve(subject.requestAccessToken())).to.be.not.null;
             })
         });
-        /*
+        
         context('With invalid clientId and secret', function(){
             it('returns an error', function(){
-                expect(subject.getAccessToken('abc','def')).to.be.rejectedWith(Error);
+                expect(Promise.resolve(subject.requestAccessToken('abc','def'))).to.be.rejectedWith(Error);
             });
-        });  */
+        });
     });
 
     describe('getSearchResults', function() {
-/*
-        beforeEach(function() {
-            sinon.stub(subject,'getSearchResults').callsFake(function(searchRequest) {
-                var searchResults = {
-                    "total" : 30
-                };
-                return searchResults;                
-            });
-        });
-
-        afterEach(function() {
-            subject.getSearchResults.restore();
-        });
-*/
-        context('With Latitude and Longitude', function() {
+        context('With Proper location parameters', function() {
             it('returns a list of restaurants', function() {
                 var searchRequest = {
                      "latitude": "50.943744",
                      "longitude": "6.940440",
                      "term": "restaurant"
-                }
-                subject.getSearchResults(searchRequest).then(function(response) {
-                    expect(parseInt(response.total)).to.be.gte(0);
-                });
+                };
+                return expect(Promise.resolve(subject.getSearchResults(searchRequest))).to.eventually.have.property("total");  
                 
             });
         });
+        context('With missing  parameters', function() {
+            it('returns a list of restaurants', function() {
+                var searchRequest = {
+                     "latitude": "50.943744",
+                     "term": "restaurant"
+                };
+                return expect(Promise.resolve(subject.getSearchResults(searchRequest))).to.be.rejectedWith(Error);  
+                
+            });
+        });        
 
     });
 

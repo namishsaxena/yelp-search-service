@@ -1,38 +1,37 @@
 'use strict'
 
+
 var Seneca = require('seneca');
 var SenecaWeb = require('seneca-web');
 var Express = require('express');
-  var bodyParser = require('body-parser');
+var bodyParser = require('body-parser')
 var seneca = Seneca();
 
-
-seneca.use('./yelp_search_plugin.js',{});
-//seneca.listen({"type": "http", "port": 8080}); 
-
+var searchServicePlugin = require('./yelp_search_plugin.js',{});
 var Routes = [{
-  pin: 'role:search,cmd:*',
-  prefix: '/api',
+  pin: 'role:yelp,cmd:*',
+  prefix: '/api/yelp',
   map: {
-    home: {
-      GET: true
-    },
-    fetch: {
+    search: {
       POST: true
     },
   }
-}]
+}];
+var app = Express();
+app.use(bodyParser.json({ type: 'application/*+json' }))
 
-seneca.use(SenecaWeb, {
-  routes: Routes,  
-  context: Express(),
-  adapter: require('seneca-web-adapter-express')
-})
+var config = {
+  routes: Routes,
+  adapter: require('seneca-web-adapter-express'),
+  context: app
+};
 
+
+seneca.use(searchServicePlugin);
+seneca.use(SenecaWeb,config);
 seneca.ready(() => {
-  var app = seneca.export('web/context')()
-  app.use(bodyParser.json());
-  app.listen('3000', () => {
-      console.log('server listening on port 3000')
-  })
-})
+  var server = seneca.export('web/context')();
+  server.listen('3000', (error) => {
+      console.log(error || 'server started on: 3000')
+  });
+});
