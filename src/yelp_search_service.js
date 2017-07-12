@@ -1,8 +1,8 @@
 
-var dotEnvPath = __dirname+ '/../.env';
-require('dotenv').config({path:dotEnvPath});
+var dotEnvPath = __dirname+ "/../.env";
+require("dotenv").config({path:dotEnvPath});
 
-var rp = require('request-promise');
+var rp = require("request-promise");
 
 
 function YelpSearchService() { }
@@ -18,11 +18,11 @@ YelpSearchService.prototype.requestAccessToken = function (clientId, clientSecre
     }
 
     var options = {
-        method: 'POST',
+        method: "POST",
         uri: process.env.YELP_AUTH_CONFIG_ENDPOINT,
         headers: {
-            'cache-control': 'no-cache',
-            'content-type': 'application/x-www-form-urlencoded'
+            "cache-control": "no-cache",
+            "content-type": "application/x-www-form-urlencoded"
         },
         form: {
             client_id: clientId,
@@ -44,7 +44,7 @@ YelpSearchService.prototype.getSearchResults = function (searchRequest) {
     var searchEndpoint = process.env.YELP_SEARCH_CONFIG_ENDPOINT;
     return this.requestAccessToken().then(function (response) {
         var options = {
-            method: 'GET',
+            method: "GET",
             uri:  searchEndpoint,
             headers: {
                 authorization: response.token_type + " " + response.access_token
