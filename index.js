@@ -16,6 +16,7 @@ var Routes = [{
 }];
 var app = Express();
 app.use(bodyParser.json({ type: 'application/*+json' }))
+app.set('port', (process.env.SERVER_PORT || 8080));
 
 var config = {
   routes: Routes,
@@ -23,13 +24,12 @@ var config = {
   context: app
 };
 
-var port = process.env.SERVER_PORT || 8080;
 
 seneca.use(searchServicePlugin);
 seneca.use(SenecaWeb,config);
 seneca.ready(() => {
   var server = seneca.export('web/context')();
-  server.listen(port, (error) => {
-      console.log(error || 'server started on: '+port);
+  server.listen(app.get('port') , (error) => {
+      console.log(error || 'server started on: '+app.get('port'));
   });
 });
