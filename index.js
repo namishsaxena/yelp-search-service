@@ -16,7 +16,7 @@ var Routes = [{
 }];
 var app = Express();
 app.use(bodyParser.json({ type: 'application/*+json' }))
-app.set('port', (process.env.SERVER_PORT || 8080));
+app.set('port', (process.env.PORT || 3000));
 
 var config = {
   routes: Routes,
