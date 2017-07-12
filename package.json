@@ -4,6 +4,7 @@
   "description": "Microservice for searching restaurants in Yelp",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
